@@ -1,0 +1,135 @@
+/* CSS Document */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css);
+
+
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+html {
+    /* background: rgb(103,22,174); */
+    min-height: 100%;
+    background: linear-gradient(135deg, #2A3FFF 0%, #FF0004 100%);
+}
+
+body {
+    background: transparent;
+}
+
+div#wrap {
+    /* display: flex; */
+    min-height: 100vh;
+    /* min-width: 90vw; */
+    /* flex-direction: column-reverse; */
+
+}
+
+#main {
+    /* max-width: 90vw; */
+    border-left: 5px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(0deg, #424CFF, #FD9024);
+}
+
+h1, h3 {
+    color: white;
+}
+h1 {
+    font-size: 4em;
+    font-weight: bolder;
+}
+h3 {
+    font-size: 2em;
+    font-weight: bolder;
+}
+
+.form-group {
+    color: white;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5em;
+  }
+
+  div.with-errors {
+    background-color: #FF0004;
+    color: white !important;
+    text-align: center !important;
+  }
+
+  #requestForm input.form-control {
+    display: block;
+    /* allows labels to sit on input when inline */
+    margin-bottom: 15px;
+    /* gives padding to bottom of inline inputs */
+    background-color: transparent;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: white;
+}
+
+#requestForm select.form-control {
+    display: block;
+    /* allows labels to sit on input when inline */
+    margin-bottom: 15px;
+    /* gives padding to bottom of inline inputs */
+    background-color: transparent;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: white;
+}
+
+.form-inline .form-group {
+    vertical-align: top;
+}
+
+#messageArea {
+    color: white;
+    font-weight: bold;
+}
+
+#message {
+    border: 1px #CCCCCC solid;
+    border-radius: 4px;
+    color: white;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 95%;
+}
+
+#submitButton {
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+#footer {
+    /* font-size: 85%; */
+}
+
+#footerToggle {
+    color: #0F3450;
+    text-decoration: none;
+    transition: .5s;
+}
+
+#footerToggle:hover {
+    color: #7797a0;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    div#wrap {
+        min-width: 100%;
+    }
+    .form-control::-webkit-input-placeholder {
+        font-size: 1em;
+      }
+    h1 {
+        font-size: 2em;
+    }
+}

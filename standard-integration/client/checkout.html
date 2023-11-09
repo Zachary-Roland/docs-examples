@@ -1,15 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PayPal JS SDK Standard Integration</title>
-  </head>
-  <body>
-    <div id="paypal-button-container"></div>
-    <p id="result-message"></p>
-    <!-- Replace the "test" client-id value with your client-id -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AWeSWNejaed-vbeHZAbQRUWBDtiQaeqK4FqKtOjurOmvBFQAtcVEnlz5LYntbxDewq8Ha6wzlgsL0zJO&currency=USD"></script>
-    <script src="app.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PayPal JS SDK Standard Integration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="container-fluid">
+  <div id="wrap" class="row d-flex align-items-end">
+    <div id="main" class="col-11 container-fluid align-items-center">
+      <div class="row d-flex justify-content-center align-items-center">
+      <div id="headerimg" class="col-xs-5 col-sm-6 p-5">
+      <img src="headerimg.png" class="img-responsive" />
+    </div>
+      <div id="formContainer" class="col-md-6">
+        <div id="formContents">
+          <h1>Talent Spotlight</h1>
+          <h3>$12</h3>
+          <h2 id="err" display="none" style="color:red;font-size:160%;font-weight:bold;background-color:white;"></h2>
+          <noscript>
+            <style type="text/css">
+              #requestForm {
+                display: none;
+              }
+            </style>
+            <div id="errDiv" class="noscriptmsg" style="color:red;font-size:160%;font-weight:bold;">
+              <p>Javascript is not enabled by your browser and is required for this site to function. Please enable it
+                in
+                order to continue.</p>
+            </div>
+          </noscript>
+          <form method="post" name="requestForm" id="requestForm" onsubmit="return submitForm();" action="/TBEX/p/aor">
+            <div class="form-group">
+              <input required="true" id="firstName" placeholder="FIRST NAME" name="firstName" type="text" value=""
+                class="form-control" pattern="^[^\\/(),+=*<>#$%&!?~@]*$"
+                oninvalid="this.setCustomValidity('First Name required and can not contain special characters \\/(),+=*<>#$%&!?~@')"
+                oninput="setCustomValidity('')">
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <input required="true" id="lastName" placeholder="LAST NAME" name="lastName" type="text" value=""
+                class="form-control" pattern="^[^\\/(),+=*<>#$%&!?~@]*$"
+                oninvalid="this.setCustomValidity('Last Name required and can not contain special characters \\/(),+=*<>#$%&!?~@')"
+                oninput="setCustomValidity('')">
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <input required="true" id="externalPersonId" placeholder="EMAIL" name="externalPersonId" type="text"
+                value="" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$"
+                title="Must be a valid email address">
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <input required="true" id="externalPersonId" placeholder="CONFIRM EMAIL" name="externalPersonId"
+                type="text" value="" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$"
+                title="Must be a valid email address">
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <input required="false" id="phone" name="phone" type="text" value="" class="form-control" placeholder="PHONE">
+              <!-- <div class="help-block with-errors"></div> -->
+            </div>
+            <div class="form-group">
+              <input required="false" id="locationName" placeholder="COMPANY NAME" name="externalPersonId"
+                type="text" value="" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$"
+                title="Must be a valid email address">
+              <!-- <div class="help-block with-errors"></div> -->
+            </div>
+            <div class="form-group">
+              <!-- <label for="externalPersonId">Email</label> -->
+              <input required="false" id="jobTitle" placeholder="POSITION" name="externalPersonId" type="text"
+                value="" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$"
+                title="Must be a valid email address">
+              <!-- <div class="help-block with-errors"></div> -->
+            </div>
+
+            <input type="hidden" id="clientId" name="clientId" value="9999">
+            <input type="hidden" id="orderId" name="orderId" value="">
+            <input type="hidden" id="email" name="email" value="">
+            <input type="hidden" id="externalApplicationId" name="externalApplicationId" value="">
+            <input type="hidden" id="emailInvite" name="emailInvite" value="true">
+            <input type="hidden" id="assessmentCode" name="assessmentCode" value="">
+            <input type="hidden" id="jobReqCode" name="jobReqCode" value="">
+            <input type="hidden" id="jobTitle" name="jobTitle" value="">
+            <input type="hidden" id="locationCode" name="locationCode" value="">
+            <input type="hidden" id="locationName" name="locationName" value="">
+            <input type="hidden" id="phoneType" name="phoneType" value="OTHER">
+            <input type="hidden" id="apiUsername" name="apiUsername" value="ZEAL">
+            <input type="hidden" id="apiPassword" name="apiPassword" value="zeal">
+          </form>
+          <!-- <div id="paypal"> -->
+          <div id="paypal-button-container"></div>
+            <p id="result-message"></p>
+          <!-- </div> -->
+          <div>
+            <a id="footerToggle" data-bs-toggle="collapse" href="#footer">Supported Browsers <span
+                class="glyphicon glyphicon-menu-down"></span></a>
+          </div>
+          <div id="footer" class="collapse">
+            <div class="card card-body">
+            <h4>Supported Browsers</h4>
+            This site supports the following browsers:
+            <ul>
+              <li><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home" target="_new">Internet
+                  Explorer (Must be IE 10 or higher)</a></li>
+              <li><a href="http://www.mozilla.com/" target="_new">Firefox</a></li>
+              <li><a href="http://www.google.com/chrome/" target="_new">Chrome</a></li>
+              <li><a href="http://www.apple.com/safari/download/" target="_new">Safari</a></li>
+            </ul>
+            <p>We support the current and previous major releases of Internet Explorer, Firefox, and Safari on an
+              ongoing
+              basis. Each time a new version is released, we begin supporting that version and stop supporting the third
+              most recent version. We support the latest version of Google Chrome which automatically updates when it
+              detects a new version is available.</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Replace the "test" client-id value with your client-id -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AWeSWNejaed-vbeHZAbQRUWBDtiQaeqK4FqKtOjurOmvBFQAtcVEnlz5LYntbxDewq8Ha6wzlgsL0zJO&currency=USD"></script>
+  <!-- <script src="app.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://s3.amazonaws.com/tb.tbex.rsrcs/lib.common/js/bootstrap-validator/dist/validator.min.js"></script>
+  <script src="https://s3.amazonaws.com/tb.tbex.rsrcs/lib.common/js/H5F/h5f.min.js"></script>
+  <script src="https://s3.amazonaws.com/tb.tbex.rsrcs/lib.common/js/tbexUtils.min.js"></script>
+  <script type="text/javascript">
+    window.paypal
+  .Buttons({
+    style: {
+      color: 'white',
+    },
+    async createOrder() {
+      try {
+        const response = await fetch("/api/orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // use the "body" param to optionally pass additional order information
+          // like product ids and quantities
+          body: JSON.stringify({
+            cart: [
+              {
+                id: "YOUR_PRODUCT_ID",
+                quantity: "YOUR_PRODUCT_QUANTITY",
+              },
+            ],
+          }),
+        });
+
+        const orderData = await response.json();
+
+        if (orderData.id) {
+          return orderData.id;
+        } else {
+          const errorDetail = orderData?.details?.[0];
+          const errorMessage = errorDetail
+            ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+            : JSON.stringify(orderData);
+
+          throw new Error(errorMessage);
+        }
+      } catch (error) {
+        console.error(error);
+        resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
+      }
+    },
+    async onApprove(data, actions) {
+      try {
+        const response = await fetch(`/api/orders/${data.orderID}/capture`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const orderData = await response.json();
+        // Three cases to handle:
+        //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+        //   (2) Other non-recoverable errors -> Show a failure message
+        //   (3) Successful transaction -> Show confirmation or thank you message
+
+        const errorDetail = orderData?.details?.[0];
+
+        if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
+          // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+          // recoverable state, per https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
+          return actions.restart();
+        } else if (errorDetail) {
+          // (2) Other non-recoverable errors -> Show a failure message
+          throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
+        } else if (!orderData.purchase_units) {
+          throw new Error(JSON.stringify(orderData));
+        } else {
+          // (3) Successful transaction -> Show confirmation or thank you message
+          // Or go to another URL:  actions.redirect('thank_you.html');
+          const transaction =
+            orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
+            orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
+          resultMessage(
+            `Transaction ${transaction.status}: ${transaction.id}<br><br>See console for all available details`,
+          );
+          console.log(
+            "Capture result",
+            orderData,
+            JSON.stringify(orderData, null, 2),
+          );
+        }
+      } catch (error) {
+        console.error(error);
+        resultMessage(
+          `Sorry, your transaction could not be processed...<br><br>${error}`,
+        );
+      }
+    },
+  })
+  .render("#paypal-button-container");
+
+// Example function to show a result to the user. Your site's UI library can be used instead.
+function resultMessage(message) {
+  const container = document.querySelector("#result-message");
+  container.innerHTML = message;
+}
+
+    if (typeof jQuery == 'undefined') {
+      // jQuery IS NOT loaded
+      document.getElementById('requestForm').style.display = 'none';
+      var err = document.getElementById("err");
+      err.innerHTML = "jQuery was blocked from loading and is required for this site to function.";
+      err.style.disply = 'block';
+    }
+
+    $(document).ready(function () {
+      $("#submit").click(function () {
+        $("#requestForm").validator('validate');
+      });
+      $("#requestForm").validator({ disable: false });
+      H5F.setup(document.getElementById("requestForm"));
+      $("select").prop("selectedIndex", -1);
+    });
+
+    function submitForm() {
+      //Set Values
+      $("#email").val($("#externalPersonId").val());
+      $("#orderId").val($("#externalPersonId").val() + '_' + $("#assessmentCode").val() + '_' + $("#locationCode").val());
+      $("#externalApplicationId").val($("#orderId").val());
+      return true;
+    };
+  </script>
+</body>
+
 </html>
